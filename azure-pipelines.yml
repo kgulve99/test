@@ -36,17 +36,7 @@ stages:
     - task: ServiceNowCreateChangeRequest@2
       inputs:
         connectedServiceName: $(servicenowConnection)
-        changeRequestType: 'normal'  # Specify the type of change request (e.g., 'normal', 'emergency', 'standard')
+        changeRequestType: 'normal'  # Specify the type of change request (e.g., 'normal', 'emergency')
         changeRequestDetails: |
           {
-            "short_description": "Deployment Change Request",
-            "description": "This change request is created automatically during the deployment stage.",
-            "category": "Software",
-            "priority": "2",
-            "risk": "medium"
-          }
-      continueOnError: false  # Ensure the pipeline stops if the change request creation fails
-
-    - script: |
-        echo "Deploying the project..."
-      displayName: 'Deploy the project'
+            "short_description": "Deployment
