@@ -7,7 +7,34 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latestd
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    steps:
+    - script: echo "Building the project..."
+      displayName: 'Build the project'
+
+- stage: Commit
+  displayName: 'Commit Stage'
+  dependsOn: Build
+  jobs:
+  - job: CommitJob
+    steps:
+    - script: echo "Committing the build artifacts..."
+      displayName: 'Commit the build artifacts'
+
+- stage: Deploy
+  displayName: 'Deploy Stage'
+  dependsOn: Commit
+  jobs:
+  - job: DeployJob
+    steps:
+    - script: echo "Deploying the project..."
+      displayName: 'Deploy the project'
 
 steps:
 - script: echo Hello, world!
